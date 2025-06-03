@@ -2,30 +2,24 @@ name: Build & Push invenio-rdm-starter
 
 on:
   workflow_dispatch:
+    inputs: {}
   push:
     branches:
-      - main
+      - pnnl-main
 
 jobs:
   build-scan-push:
-    runs-on: ubuntu-latest
-    env:
-      REGISTRY: pnnldp.azurecr.io
-      IMAGE_NAME: invenio-rdm-starter
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-      - name: 'Build Docker Image'
-        uses: pnnl-int/pnnl-actions-build-docker@v1
-        with:
-          working-directory: ./web
-          buildx-version: 'v0.16.2'
-          registry: ${{ env.REGISTRY }}
-          image-tag: invenio-rdm-starter:latest
-          push: "true"
-          scan: "true"
-          scan-ubuntufix: "true"
-          fail-onvulnerability: false
-          az-client-id: ${{ secrets.ACR_USERNAME }}
-          az-client-secret: ${{ secrets.ACR_PASSWORD }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+    uses: ./.github/workflows/build-docker-image.yml
+    with:
+      working-directory: .
+      buildx-version: 'v0.16.2'
+      registry: pnnldp.azurecr.io
+      image-tag: invenio-rdm-starter:latest
+      push: true
+      scan: true
+      scan-ubuntufix: true
+      fail-onvulnerability: false
+    secrets:
+      az-client-id: ${{ secrets.ACR_USERNAME }}
+      az-client-secret: ${{ secrets.ACR_PASSWORD }}
+      github-token: ${{ secrets.GITHUB_TOKEN }}
