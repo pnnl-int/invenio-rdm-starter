@@ -5,3 +5,7 @@
 html.cover-page {
   background-color: @grey;
 }
+
+.outer-navbar {
+  background-color: #b25a00 !important; 
+}
