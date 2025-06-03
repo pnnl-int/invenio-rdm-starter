@@ -2,11 +2,9 @@ name: Build & Push invenio-rdm-starter
 
 on:
   workflow_dispatch:
-    inputs: {}
   push:
     branches:
-      - pnnl-main
-
+      - main
 jobs:
   build-scan-push:
     uses: ./.github/workflows/build-docker-image.yml
