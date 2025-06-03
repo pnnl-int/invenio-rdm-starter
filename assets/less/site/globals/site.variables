@@ -10,10 +10,13 @@
 
 /*-------------------
     Brand Colors
---------------------*/
-
+    
 @primaryColor        : @sky;
 @secondaryColor      : @grey;
+--------------------*/
+
+@primaryColor:      #b25a00;
+@secondaryColor:    #616265;
 
 @lightPrimaryColor   : @lightSky;
 @lightSecondaryColor : @lightGrey;
